@@ -72,8 +72,6 @@ def deletePosts(id: int, db: Session = Depends(get_db), current_user: int = Depe
     postToRemoveQuery = db.query(models.Post).filter(models.Post.id == id)
     # cursor.execute("""Delete from posts where id = %s Returning* """, (str(id)))
     # postToRemove = cursor.fetchone()
-    print(postToRemoveQuery.first().user_id )
-    print(current_user.id)
     if postToRemoveQuery.first() == None:
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail= f"No post with id: {id} to be deleted")
     if postToRemoveQuery.first().user_id != current_user.id:
@@ -93,8 +91,6 @@ def updatePost(id: int, new_post: schemas.PostModelBase, db: Session = Depends(g
     # cursor.execute("""UPDATE posts SET title=%s, content=%s, published=%s Where id = %s RETURNING *""", (new_post.title,new_post.content, new_post.published,str(id)))
     # postToUpdate = cursor.fetchone()
     # conn.commit()
-    print(postToUpdateQuery.first().user_id )
-    print(current_user.id)
     if not postToUpdateQuery.first():
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail= f"No post with id: {id} to be updated")
     if postToUpdateQuery.first().user_id != current_user.id:

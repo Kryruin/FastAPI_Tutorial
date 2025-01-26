@@ -11,7 +11,7 @@
 #########################################################################################
 #Run "uvicorn <directory>.<fileName without extension>:<fastapi Instance> --reload"
 #uvicorn app.main:app --reload
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from . import models
 from .database import engine
 from .routers import post,user, auth,vote
@@ -36,7 +36,7 @@ app.include_router(auth.router)
 app.include_router(vote.router)
 
 #app get is a decorator to use http methods
-@app.get("/")
+@app.get("/",status_code=status.HTTP_200_OK)
 async def root():
     return {"message": "Hello  aasd World"}
 
