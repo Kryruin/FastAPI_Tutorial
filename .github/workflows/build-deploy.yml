@@ -12,27 +12,27 @@ on: [push,pull_request]
 jobs:
     job1:
         env:
-            DATABASE_HOSTNAME: localhost
-            DATABASE_PORT: 5432
-            DATABASE_PASSWORD: 1Password
-            DATABASE_NAME: fastapi-DB
-            DATABASE_USERNAME: postgres
-            SECRET_KEY: 86b4c0ee0c96554d406e78e972d4b778c17d1f606e350354189098a3d8295976
-            ALGORITHM : "HS256"
-            ACCESS_TOKEN_EXPIRE_MINUTES: 30
+          DATABASE_HOSTNAME: localhost
+          DATABASE_PORT: 5432
+          DATABASE_PASSWORD: 1Password
+          DATABASE_NAME: fastapi-DB
+          DATABASE_USERNAME: postgres
+          SECRET_KEY: 86b4c0ee0c96554d406e78e972d4b778c17d1f606e350354189098a3d8295976
+          ALGORITHM : "HS256"
+          ACCESS_TOKEN_EXPIRE_MINUTES: 30
         runs-on: ubuntu-latest
         steps:
-            - name: pulling git repo
-              uses: actions/checkout@v2 #actions refer to github actions 
-            - name: Install python version 3.12.8
-              uses: actions/setup-python@v2 
-              with:
-                python-version: '3.12.8' 
-            - name: update pip
-              run: python -m pip install --upgrade pip
-            - name: install all dependencies
-              run: pip install -r requirements.txt
-            - name: Run the pytest scripts
-              run: | 
-                pip install pytest
-                pytest -v -s 
+          - name: pulling git repo
+            uses: actions/checkout@v2 #actions refer to github actions 
+          - name: Install python version 3.12.8
+            uses: actions/setup-python@v2 
+            with:
+              python-version: '3.12.8' 
+          - name: update pip
+            run: python -m pip install --upgrade pip
+          - name: install all dependencies
+            run: pip install -r requirements.txt
+          - name: Run the pytest scripts
+            run: | 
+              pip install pytest
+              pytest -v -s 
